@@ -12,14 +12,14 @@ Pseudocode
 ----------
 Module main()
     // Local variables
-    Declare Integer nObjects = 0    // Nonnegative number of objects
+    Declare Integer nObjectCount = 0    // Nonnegative number of objects
     Declare Integer nFactorial = 0  // Resulting permutation count
 
     // Display intro to user.
     Call fluffy_intro()
 
     // Get the a non-negative number of Objects from the user
-    Set nObjects = get_valid_inputs([["nonnegative integer",
+    Set nObjectCount = get_valid_inputs([["nonnegative integer",
                    "nonnegative number to calculate"]])
 
     // Calculate the factorial of nObjects
@@ -62,7 +62,7 @@ Module get_valid_inputs(List requestsList)
         //  prompted to enter a valid value.
         While (Not test_value(request[0], untestedInput))
             Display untestedInput "is not a valid value."
-            Set untestedInput = int(prompt_user_for_input(request[1]))
+            Set untestedInput = (prompt_user_for_input(request[1]))
         End While
 
         // The user input tested valid and is appended to the userInputs List.
@@ -76,7 +76,7 @@ End Module
 // prompt_user_for_item accepts a string as an argument and returns the input
 // to the calling module.
 Module prompt_user_for_item(String promptTerm)
-    Display "Please enter your,", pomptTerm, "."
+    Display "Please enter your,", promptTerm, "."
     // The user input is returned in an anonymous variable
     Return Input
 End Module
@@ -87,10 +87,33 @@ End Module
 Module test_value(testCondition, testItem)
     // The If-Then-Else structure functions as a Switch for test selection.
     If testCondition == "nonnegative integer" Then
-        If testItem >= 0 Then
+        // Is testItem an Integer? If so, then is it also greater than
+        //  or equal to 0?
+        If ((testItem Type == Integer) And (testItem >= 0)) Then
             Return True
         Else
             Return False
         End If
     End If
 End Module
+
+
+// calc_factorial uses recursion to repeatedly call itself while decrementing
+//  nCount and multiplying fValue by nCount.  When nCount is less than or
+//  equals 1 only fValue is returned.  nCount can equal 0 because 0! equals 1.
+//  Recursion isn't very efficient in Python and has a limit to the number of
+//  recursive calls that can be made.
+Module calc_factorial(nCount, fValue = 1)
+    If nCount <= 1 Then
+        Return fValue
+    Else
+        Return calc_factorial(nCount - 1, fValue * nCount)
+
+
+
+// display_results is passed values used in print statements to display
+//  the results of the program to the user.
+Module display_results(nObjects, nFactorial)
+    Display "The factorial of", nObjects, " ("is", nFactorial,"."
+End Module
+
