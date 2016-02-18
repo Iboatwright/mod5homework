@@ -50,12 +50,32 @@ Module get_valid_inputs(List requestsList)
     // Loop through each entry in requestList assigning each List pair
     //  to request.
     For request in requestsList Do
-// TODO: convert this into a module that looks like var = test_mod(request)
-        // Local variable to help userInput for validation testing.
-        // If needed Type could be passed in requestList
+        // Temporary holding variable for testing user input validity
         Declare untestedInput
 
+        // First user prompt before testing loop
+        Set untestedInput = prompt_user_for_input(request[1])
+
+// TODO: double check comments here
+        // Loop control variable initialized to False for While loop first
+        //  test.  Input wont be assigned to the return
+        //  variable until isValidInput is True and the loop exits.
+        Declare Boolean isValidInput // = False fixme(???)
+        While (Not isValidInput)
         // This passes the prompt text to the user input method.
-        untestedInput = prompt_user_for_input(request[1])
 
         // Call the test module and assign the valid
+
+
+// test_value uses the testCondition to select the proper test.
+// It returns True or False to the calling Module.
+Module test_value(testCondition, testItem)
+    // The If-Then-Else structure functions as a Switch for test selection.
+    If testCondition == "nonnegative integer" Then
+        If testItem >= 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End If
+End Module
