@@ -1,0 +1,61 @@
+12. Calculating the Factorial of a Number
+    In mathematics, the notation n! represents the factorial of the
+    nonnegative integer n. The factorial of n is the product of all
+    the nonnegative integers from 1 up through n. For example:
+            7! = 1 × 2 × 3 × 4 × 5 × 6 × 7 = 5,040
+    and
+                4! = 1 × 2 × 3 × 4 = 24
+    Design a program that asks the user to enter a nonnegative integer
+    and then displays the factorial of that number.
+
+Pseudocode
+----------
+Module main()
+    // Local variables
+    Declare Integer nObjects = 0    // Nonnegative number of objects
+    Declare Integer nFactorial = 0  // Resulting permutation count
+
+    // Display intro to user.
+    Call fluffy_intro()
+
+    // Get the a non-negative number of Objects from the user
+    Set nObjects = get_valid_inputs([["nonnegative integer",
+                   "nonnegative number to calculate"]])
+
+    // Calculate the factorial of nObjects
+    Set nFactorial = calc_factorial(nObjects)
+
+     // Display calculated factorial to user
+     display_results(nObjects, nFactorial)
+End Module
+
+
+// Displays an introduction to the program and describes what it does
+Module fluffy_intro()
+    Display "Welcome to the n! Factorial Calculator."
+    Display "This program will calculate factorials of nonnegative integers."
+    Display "It then displays the results for your viewing pleasure.\n"
+End Module
+
+
+// get_valid_inputs requests input from the user then tests the input.
+//   If invalid, it will alert the user and request the correct input.
+// The parameter is a nested List of ordered pair Lists.
+//   First value is the validation test and second is the user prompt.
+Module get_valid_inputs(List requestsList)
+
+    // local List to hold user inputs for return to calling module
+    Declare List userInputs
+
+    // Loop through each entry in requestList assigning each List pair
+    //  to request.
+    For request in requestsList Do
+// TODO: convert this into a module that looks like var = test_mod(request)
+        // Local variable to help userInput for validation testing.
+        // If needed Type could be passed in requestList
+        Declare untestedInput
+
+        // This passes the prompt text to the user input method.
+        untestedInput = prompt_user_for_input(request[1])
+
+        // Call the test module and assign the valid
