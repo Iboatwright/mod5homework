@@ -6,6 +6,9 @@
 # Ivan Boatwright
 # February 18, 2016 (doomsday tomorrow)
 
+# textwrap is used to wrap integers larger that 70 characters.
+import textwrap
+
 def main():
     # Variable definitions
     nObjectCount = 0    # Nonnegative number (the n for n!)
@@ -30,9 +33,12 @@ def main():
 
 # Displays an introduction to the program and describes what it does.
 def fluffy_intro():
-    print('Welcome to the n! Factorial Calculator.')
+    print('\nWelcome to the n! Factorial Calculator.')
     print('This program will calculate factorials of nonnegative integers.')
     print('It then displays the results for your viewing pleasure.\n')
+    print('  *Note: Due to unforseen limitations and time constraints')
+    print('         any n! > ~989 will cause an error.  Please enter any')
+    print('         integer from 0 to 989.\n')
     return None
 
 
@@ -57,14 +63,13 @@ def get_valid_inputs(requestsList):
         #  prompted to enter a valid value.
         while (not test_value(request[0], untestedInput)):
 
-            print(untestedInput, 'is not a valid value.')
+            print('!!! Error: {} is not a valid value.'.format(untestedInput))
             untestedInput = (prompt_user_for_input(request[1]))
 
         # The user input tested valid and is appended to the userInputs List.
         userInputs.append(untestedInput)
     # for loop terminates and userInputs are returned to calling Module
     return userInputs[0]  # Only one value to return in this program.
-
 
 
 # prompt_user_for_item is passed a String to print to screen as part of a user
@@ -77,7 +82,6 @@ def prompt_user_for_input(promptTerm):
     return int(input('  >> '))
 
 
-
 # test_value uses the testCondition to select the proper test.
 # It returns True or False to the calling Module.
 def test_value(testCondition, testItem):
@@ -85,7 +89,8 @@ def test_value(testCondition, testItem):
     if testCondition == 'nonnegative integer':
         # Is testItem an Integer? If so, then is it also greater than
         #  or equal to 0?
-        if (isinstance(testItem, int) and (testItem >= 0)):
+        # Last minute addition of 989 upper limit.
+        if isinstance(testItem, int) and 990 > testItem >= 0:
             return True
         else:
             return False
@@ -108,8 +113,17 @@ def calc_factorial(nCount, fValue=1):
 # display_results is passed values used in print statements to display
 #  the results of the program to the user.
 def display_results(nObjects, nFactorial):
-    print('\n')
-    print('The factorial of {} is {}.'.format(nFactorial, nObjects))
+    # There are 3 different printouts depending on the size of nFactorial.
+    #  First is the whole number, second is in exponential form, and third
+    #  is wrapped every 70 characters.
+    if nObjects < 10:
+        print('The factorial of {} is {}.'.format(nObjects, nFactorial))
+    elif nObjects < 171:
+        print('The factorial of {} is {:E}.'.format(nObjects, nFactorial))
+    else:
+        print('The factorial of {} is:'.format(nObjects))
+        for line in textwrap.wrap(str(nFactorial),70):
+            print(line)
     return None
 
 
