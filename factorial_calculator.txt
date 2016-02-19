@@ -30,7 +30,7 @@ Module main()
 End Module
 
 
-// Displays an introduction to the program and describes what it does
+// Displays an introduction to the program and describes what it does.
 Module fluffy_intro()
     Display "Welcome to the n! Factorial Calculator."
     Display "This program will calculate factorials of nonnegative integers."
@@ -114,6 +114,6 @@ Module calc_factorial(nCount, fValue = 1)
 // display_results is passed values used in print statements to display
 //  the results of the program to the user.
 Module display_results(nObjects, nFactorial)
-    Display "The factorial of", nObjects, " ("is", nFactorial,"."
+    Display "The factorial of", nObjects, "is", nFactorial,"."
 End Module
 
